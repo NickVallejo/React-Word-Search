@@ -1,0 +1,202 @@
+body {
+  background: #2f2f2f;
+}
+
+body .app-wrap {
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+body .app-wrap .src-wizard-hero {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+body .app-wrap .src-wizard-hero .search-results {
+  max-height: 590px;
+  overflow-y: scroll;
+  padding: 0px 40px;
+  font-size: 35px;
+  text-align: center;
+}
+
+body .app-wrap .src-wizard-hero .search-results h6 {
+  font-family: utopia-std-caption, serif;
+  font-weight: 700;
+  font-style: normal;
+  color: #0fa3b1;
+  cursor: pointer;
+}
+
+body .app-wrap .src-wizard-hero .search-results h6:hover {
+  opacity: 0.7;
+}
+
+body .app-wrap .src-wizard-hero .search-box {
+  width: 590px;
+  height: 590px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+body .app-wrap .src-wizard-hero .search-box div[class^="input-box"] {
+  width: 25%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  position: relative;
+}
+
+body .app-wrap .src-wizard-hero .search-box div[class^="input-box"] input {
+  background: transparent;
+  border: 1px solid #f9fbf2;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  font-size: 80px;
+  text-align: center;
+  font-family: utopia-std-caption, serif;
+  font-weight: 700;
+  font-style: normal;
+  color: #f9fbf2;
+}
+
+body .app-wrap .src-wizard-hero .search-box div[class^="input-box"] input:focus {
+  color: #0fa3b1;
+}
+
+body .app-wrap .src-wizard-hero .search-box .path-show {
+  background: red !important;
+}
+
+body .app-wrap .app-info {
+  max-width: 475px;
+}
+
+body .app-wrap .app-info .proj-title {
+  font-family: utopia-std-caption, serif;
+  font-weight: 700;
+  font-style: normal;
+  color: #f9fbf2;
+  font-size: 51px;
+  margin-bottom: 10px;
+}
+
+body .app-wrap .app-info .proj-title span {
+  color: #0fa3b1;
+}
+
+body .app-wrap .app-info .proj-desc {
+  color: #f9fbf2;
+  font-size: 14px;
+  font-family: sans-serif;
+  line-height: 24px;
+  font-weight: 200;
+}
+
+body .app-wrap .app-info .proj-btn {
+  border: 0px;
+  background: #0fa3b1;
+  color: #f9fbf2;
+  font-size: 24px;
+  font-family: utopia-std-caption, serif;
+  font-weight: 700;
+  font-style: normal;
+  padding: 7px 25px;
+  border-radius: 3px;
+}
+
+body .app-wrap .app-info .proj-btn:disabled {
+  opacity: 0.5;
+}
+
+/* DIRS */
+.dir {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 12px;
+  background: #0fa3b18f;
+  z-index: 20;
+  border-radius: 40px;
+}
+
+.dirshow-nw {
+  display: block;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  top: 1%;
+  left: -62.5%;
+  width: 130%;
+}
+
+.dirshow-ne {
+  display: block;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  top: 1%;
+  left: 30.5%;
+  width: 130%;
+}
+
+.dirshow-sw {
+  display: block;
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  bottom: -6.5%;
+  left: -60%;
+  width: 130%;
+}
+
+.dirshow-se {
+  display: block;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  bottom: -6.5%;
+  left: 40%;
+  width: 130%;
+}
+
+.dirshow-n {
+  display: block;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  top: -1.5%;
+  left: 2.5%;
+}
+
+.dirshow-s {
+  display: block;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+  top: 98%;
+  left: -1%;
+}
+
+.dirshow-e {
+  display: block;
+  top: 50%;
+  right: -50%;
+}
+
+.dirshow-w {
+  display: block;
+  top: 50%;
+  left: -50%;
+}
+/*# sourceMappingURL=App.css.map */
