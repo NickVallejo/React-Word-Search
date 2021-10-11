@@ -3,6 +3,7 @@ let dic
 let pathArray = []
 let wordDisplay = []
 let uniqueArrays = []
+const addLoad = new CustomEvent('loadPush')
 
 const genGrid = (gridSize, letters) => {
     const sqrtSize = Math.sqrt(gridSize)
@@ -15,7 +16,6 @@ const genGrid = (gridSize, letters) => {
         row.forEach((col, colIndex) => {
             letterMatrix[rowIndex][colIndex] = letters[counter]
             counter++
-            //wsWrap.insertAdjacentHTML('beforeend', `<div class="ws-box box_${rowIndex}-${colIndex}"><div class='dir'></div><h2>${letterMatrix[rowIndex][colIndex]}</h2></div>`)  
         })
     })
 }
@@ -39,7 +39,7 @@ const displayResults = (resReturn) => {
     return wordDisplay
 }
 
-const wordSearch = (path=[], boxIndex) => {
+const wordSearch = (path=[]) => {
     let posX = path[path.length - 1].row
     let posY = path[path.length - 1].col
     for(const i of [-1, 0, 1]){
@@ -56,32 +56,25 @@ const wordSearch = (path=[], boxIndex) => {
             const newPathLetters = thePath.map(obj => obj.letter)
             const letters = newPathLetters.join('').toUpperCase()
             const foundStart = dic.find(word => word.startsWith(letters+letterMatrix[row][col].toUpperCase()))
-            // console.log(document.querySelector(`.box_${row}-${col}`))
-            // document.querySelector(`.box_${row}-${col}`).classList.add('ping')
-
 
             if(!foundStart) {
-                // const pings = document.querySelectorAll('.ping')
-                // pings.forEach(ping => ping.classList.remove('ping'))
                 continue
             } else{
                 thePath.push({letter: letterMatrix[row][col], row: row, col: col })
                 foundWord = letters+letterMatrix[row][col].toUpperCase().trim() == foundStart.trim() ? true : false
             }
 
-            //console.log(letters+letterMatrix[row][col].toUpperCase(), 'WORD WE FOUND', foundStart, 'did it match a word?', foundWord)
-
             if(foundWord){
-                //! Check to see if the word already exists in the array
                 uniqueArrays.push(thePath)
             }
+
             wordSearch(thePath)
         }
     }
 } 
 
 export const appExec = async(gridSize, letters) => {
-    let boxIndex = 0;
+
     genGrid(gridSize, letters)
     await wordFetch()
 
@@ -89,8 +82,8 @@ export const appExec = async(gridSize, letters) => {
         row.forEach((letter, colIndex) => {
             console.log('word searching...')
             let path = [{letter: letterMatrix[rowIndex][colIndex], row: rowIndex, col: colIndex}]
-            wordSearch(path, boxIndex)
-            boxIndex++
+            wordSearch(path)
+            document.dispatchEvent(addLoad)
         })
     })
 

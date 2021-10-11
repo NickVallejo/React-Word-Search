@@ -14,6 +14,7 @@ body .app-wrap {
       -ms-flex-pack: justify;
           justify-content: space-between;
   max-width: 1400px;
+  padding: 0px 40px;
   margin: 0 auto;
 }
 
@@ -29,6 +30,18 @@ body .app-wrap .src-wizard-hero .search-results {
   padding: 0px 40px;
   font-size: 35px;
   text-align: center;
+}
+
+body .app-wrap .src-wizard-hero .search-results::-webkit-scrollbar {
+  border-radius: 10px;
+  width: 5px;
+  background: rgba(128, 128, 128, 0.425);
+  border-radius: 10px;
+}
+
+body .app-wrap .src-wizard-hero .search-results::-webkit-scrollbar-thumb {
+  background-color: #0fa3b1;
+  border-radius: 10px;
 }
 
 body .app-wrap .src-wizard-hero .search-results h6 {
@@ -86,6 +99,7 @@ body .app-wrap .src-wizard-hero .search-box .path-show {
 
 body .app-wrap .app-info {
   max-width: 475px;
+  margin-right: 40px;
 }
 
 body .app-wrap .app-info .proj-title {
@@ -198,5 +212,64 @@ body .app-wrap .app-info .proj-btn:disabled {
   display: block;
   top: 50%;
   left: -50%;
+}
+
+.loader-sec {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1c1c1ccb;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  z-index: 999;
+}
+
+.loader-sec h2 {
+  font-size: 100px;
+  color: #f9fbf2;
+}
+
+.loader-sec .loader-bar {
+  max-width: 600px;
+  width: 100%;
+  height: 20px;
+  background-color: grey;
+  border-radius: 12px;
+  position: relative;
+}
+
+.loader-sec .loader-bar .loader-thumb {
+  height: 100%;
+  background-color: #0fa3b1;
+  border-radius: 12px;
+  -webkit-transition: 1.5s ease;
+  transition: 1.5s ease;
+}
+
+@media (max-width: 1100px) {
+  body .app-wrap {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column;
+            flex-flow: column;
+    max-width: 770px;
+  }
+  body .app-wrap .app-info {
+    max-width: 100%;
+    margin-right: 0px;
+  }
 }
 /*# sourceMappingURL=App.css.map */
