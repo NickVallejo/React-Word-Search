@@ -1,12 +1,12 @@
 import React, {useState, useEffect, useRef} from 'react'
 
-function LoadingScreen({srcSize}) {
+function LoadingScreen({srcSize, loadingProg}) {
     const [dots, setDots] = useState('')
-    const [loadingProg, setLoadingProg] = useState(0)
+    // const [loadingProg, setLoadingProg] = useState(0)
 
-    useEffect(() => {   
-        document.addEventListener('loadPush', progLoader, false)
-    }, [])
+    // useEffect(() => {   
+    //     document.addEventListener('loadPush', progLoader, false)
+    // }, [])
 
     useEffect(() => {
       console.log(loadingProg, 'LOADING PROG')
@@ -17,10 +17,9 @@ function LoadingScreen({srcSize}) {
     }, [dots])
 
     const progLoader = (e) => {
-        console.log('DETAILS', e.details)
-        setLoadingProg(prevProg => {
-            return prevProg + (100/srcSize)
-        })
+        // setLoadingProg(prevProg => {
+        //     return prevProg + (100/srcSize)
+        // })
     }
 
     const adder = (dotLength) => {
