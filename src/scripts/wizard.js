@@ -79,11 +79,10 @@ export const appExec = async(gridSize, letters) => {
     await wordFetch()
 
     letterMatrix.forEach((row, rowIndex) => {
-        row.forEach((letter, colIndex) => {
+        row.forEach(async (letter, colIndex) => {
             console.log('word searching...')
             let path = [{letter: letterMatrix[rowIndex][colIndex], row: rowIndex, col: colIndex}]
             wordSearch(path)
-            await new Promise(resolve => setTimeout(() => ))
             document.dispatchEvent(addLoad)
         })
     })

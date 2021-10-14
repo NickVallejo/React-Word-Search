@@ -16,11 +16,11 @@ function LoadingScreen({srcSize}) {
         adder(dots.length)
     }, [dots])
 
-    const progLoader = (e) => {
-        console.log('DETAILS', e.details)
+    const progLoader = async() => {
         setLoadingProg(prevProg => {
             return prevProg + (100/srcSize)
         })
+        await new Promise((resolve) => setTimeout(resolve, 350));
     }
 
     const adder = (dotLength) => {
