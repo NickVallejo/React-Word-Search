@@ -83,6 +83,7 @@ export const appExec = async(gridSize, letters) => {
             console.log('word searching...')
             let path = [{letter: letterMatrix[rowIndex][colIndex], row: rowIndex, col: colIndex}]
             wordSearch(path)
+            await new Promise(resolve => setTimeout(() => ))
             document.dispatchEvent(addLoad)
         })
     })
