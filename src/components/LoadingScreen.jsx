@@ -17,6 +17,7 @@ function LoadingScreen({srcSize}) {
     }, [dots])
 
     const progLoader = async() => {
+        console.log('PROG LOADER CALLED')
         setLoadingProg(prevProg => {
             return prevProg + (100/srcSize)
         })
