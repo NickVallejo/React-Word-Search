@@ -5,7 +5,7 @@ let wordDisplay = []
 let uniqueArrays = []
 const addLoad = new CustomEvent('loadPush')
 
-const genGrid = (gridSize, letters) => {
+export const genGrid = (gridSize, letters) => {
     const sqrtSize = Math.sqrt(gridSize)
     let counter = 0
     
@@ -18,13 +18,16 @@ const genGrid = (gridSize, letters) => {
             counter++
         })
     })
+
+    return letterMatrix
 }
 
-const wordFetch = async() => {
+export const wordFetch = async() => {
     const dictionary = await fetch('dictionary.txt')
     dic = await dictionary.text()
     dic = dic.split("\r\n")
     dic = dic.filter(word => word.length > 2)
+    return dic
 }
 
 const displayResults = (resReturn) => {
@@ -39,9 +42,10 @@ const displayResults = (resReturn) => {
     return wordDisplay
 }
 
-const wordSearch = (path=[]) => {
+export const wordSearch = (path=[], dic, letterMatrix) => {
     let posX = path[path.length - 1].row
     let posY = path[path.length - 1].col
+
     for(const i of [-1, 0, 1]){
         for(const j of [-1, 0, 1]){
             if (i === 0 && j === 0) continue;
@@ -68,9 +72,11 @@ const wordSearch = (path=[]) => {
                 uniqueArrays.push(thePath)
             }
 
-            wordSearch(thePath)
+            wordSearch(thePath, dic, letterMatrix)
         }
     }
+
+    return uniqueArrays
 } 
 
 export const appExec = async(gridSize, letters) => {
@@ -88,6 +94,4 @@ export const appExec = async(gridSize, letters) => {
     })
 
     return displayResults(uniqueArrays)
-    // console.log(uniqueArrays)
-    // return uniqueArrays
 }
