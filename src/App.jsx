@@ -1,24 +1,31 @@
 import './App.css';
-import {appExec, genGrid, wordSearch, wordFetch} from './scripts/wizard.js';
+import {appExec, wordSearch, displayResults, clearPreviousWords, appConfig, genGrid} from './scripts/wizard.js';
+import {genStart} from '../src/helpers/appStart.js'
 import AppWrap from './components/AppWrap';
 import AppInfo from './components/AppInfo';
 import WordSearch from './components/search-box/WordSearch'
 import LoadingScreen from './components/LoadingScreen';
 import {useState, useEffect} from 'react'
 
-const addLoad = new CustomEvent('loadPush')
-
 function App() {
+
   const [genReady, setGenReady] = useState(false)
+  // sets the size of the grid to 16 tiles (4x4)
   const [srcSize, setSrcSize] = useState(16)
   const [letters, setLetters] = useState()
   const [wordRes, setWordRes] = useState()
   const [loader, setLoader] = useState(false)
   const [loadingProg, setLoadingProg] = useState(0)
 
-  // useEffect(() => {
-  //   console.log(`loading prog has changed ${loadingProg}`)
-  // }, [loadingProg])
+  // on component mount, execute the appCondig function in wizard.js
+  // this prepares the game dictionary and arrays of words
+  useEffect(() => {
+    appConfig() 
+  }, [])
+
+  useEffect(() => {
+    console.log('SET BEFORE START', wordRes)
+  }, [wordRes])
 
   const readySetter = (ready, letters) => {
     if(ready){
@@ -30,48 +37,42 @@ function App() {
   }
 
   const genStart = async() => {
+    let uniqueArrays = [];
+    const letterMatrix = await genGrid(srcSize, letters)
+    
+    // erase the last response of searched words before starting a new search
+    // setWordRes(undefined)
+    //start the loading screen overlay
     setLoader(true)
-    const letterMatrix = genGrid(srcSize, letters)
-    const dic = await wordFetch()
 
-    for(let i = 0; i < letterMatrix.length; i++){
-      for(let j = 0; j < letterMatrix[0].length; j++){
-          console.log('word searching...')
-          let path = [{letter: letterMatrix[i][j], row: i, col: j}]
-          const uniqueArrays = wordSearch(path, dic, letterMatrix)
-          setLoadingProg(prevProg => {
-            return prevProg + (100/srcSize)
-        })
-        await new Promise((resolve) => setTimeout(resolve, 350));
-      }
-    }
+    clearPreviousWords()
+    //begin a word search loop where each search starts with a letter in the 2d array
+    
+    // for(let i = 0; i < letterMatrix.length; i++){
+    //   for(let j = 0; j < letterMatrix[0].length; j++){
+    //       let path = [{letter: letterMatrix[i][j], row: i, col: j}]
+    //       uniqueArrays = wordSearch(path, letterMatrix)
+    //       setLoadingProg(prevProg => {return prevProg + (100/srcSize)})
+    //       await new Promise((resolve) => setTimeout(resolve, 350));
+    //   }
+    // }
 
-    // letterMatrix.forEach((row, rowIndex) => {
-    //   row.forEach(async(letter, colIndex) => {
-    //       console.log('word searching...')
-    //       let path = [{letter: letterMatrix[rowIndex][colIndex], row: rowIndex, col: colIndex}]
-    //       const uniqueArrays = wordSearch(path, dic, letterMatrix)
-    //       console.log(uniqueArrays)
-    //       setLoadingProg(prevProg => {
-    //         return prevProg + (100/srcSize)
-    //     })
-    //     await new Promise((resolve) => setTimeout(resolve, 350));
-    //   })
-    // })
 
-    console.log('LETTER MATRIX', letterMatrix)
-    // appExec(srcSize, letters).then((words) => {
-    //   setWordRes(words)
-    //   setTimeout(() => {
-    //     setLoader(false)
-    //   }, 5000)
-    // })
+    const words = displayResults(uniqueArrays)
+    setWordRes(words)
+    setLoader(false)
+    setLoadingProg(0)
   }
 
   return (
     <AppWrap loader={loader}>
+      {/* loading screen overlay */}
       {loader && <LoadingScreen srcSize={srcSize} loadingProg={loadingProg}/>}
+
+      {/* landing page text and button that starts the search */}
       <AppInfo genReady={genReady} genStart={genStart}/>
+
+      {/* word search box that needs to be populated with letters before starting game */}
       <WordSearch srcSize={srcSize} readySetter={readySetter} wordRes={wordRes}/>
     </AppWrap>
   );

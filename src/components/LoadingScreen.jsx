@@ -1,52 +1,13 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React from 'react'
 
-function LoadingScreen({srcSize, loadingProg}) {
-    const [dots, setDots] = useState('')
-    // const [loadingProg, setLoadingProg] = useState(0)
-
-    // useEffect(() => {   
-    //     document.addEventListener('loadPush', progLoader, false)
-    // }, [])
-
-    useEffect(() => {
-      console.log(loadingProg, 'LOADING PROG')
-    }, [loadingProg])
-
-    useEffect(() => {
-        adder(dots.length)
-    }, [dots])
-
-    const progLoader = (e) => {
-        // setLoadingProg(prevProg => {
-        //     return prevProg + (100/srcSize)
-        // })
-    }
-
-    const adder = (dotLength) => {
-        const timeout = setTimeout(() => {
-            switch(dotLength){
-                case 0:
-                    setDots('.')
-                    break
-                case 1:
-                    setDots('..')
-                    break
-                case 2:
-                    setDots('...')
-                    break
-                default:
-                    setDots('')
-                    break
-            }
-        }, 500)
-    }
+function LoadingScreen({loadingProg}) {
 
     return (
         <div className='loader-sec'>
-           <h2>Loading <span>{dots}</span></h2>
+           <h2>Loading...</h2>
            <div className="loader-bar">
                <div className="loader-thumb" style={{width: `${loadingProg}%`}}></div>
-               <h3>{loadingProg}</h3>
+               <h3 className="loader-num">{loadingProg}%</h3>
            </div>
         </div>
     )

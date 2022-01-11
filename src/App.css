@@ -1,5 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 body {
   background: #2f2f2f;
+  font-family: "Lato", sans-serif;
 }
 
 body .app-wrap {
@@ -13,7 +15,7 @@ body .app-wrap {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  max-width: 1400px;
+  max-width: 1450px;
   padding: 0px 40px;
   margin: 0 auto;
 }
@@ -22,6 +24,19 @@ body .app-wrap .src-wizard-hero {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
+}
+
+body .app-wrap .src-wizard-hero .word-count {
+  position: absolute;
+  top: -85px;
+  left: 10px;
+  color: #f9fbf2;
+  font-size: 32px;
+}
+
+body .app-wrap .src-wizard-hero .word-count .count {
+  color: #0fa3b1;
 }
 
 body .app-wrap .src-wizard-hero .search-results {
@@ -45,11 +60,12 @@ body .app-wrap .src-wizard-hero .search-results::-webkit-scrollbar-thumb {
 }
 
 body .app-wrap .src-wizard-hero .search-results h6 {
-  font-family: utopia-std-caption, serif;
   font-weight: 700;
   font-style: normal;
   color: #0fa3b1;
   cursor: pointer;
+  margin: 0px;
+  margin-bottom: 30px;
 }
 
 body .app-wrap .src-wizard-hero .search-results h6:hover {
@@ -70,7 +86,7 @@ body .app-wrap .src-wizard-hero .search-box div[class^="input-box"] {
   width: 25%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  padding: 10px;
+  padding: 1%;
   position: relative;
 }
 
@@ -79,14 +95,14 @@ body .app-wrap .src-wizard-hero .search-box div[class^="input-box"] input {
   border: 1px solid #f9fbf2;
   width: 100%;
   height: 100%;
-  padding: 0px;
   margin: 0px;
   font-size: 80px;
   text-align: center;
-  font-family: utopia-std-caption, serif;
   font-weight: 700;
   font-style: normal;
   color: #f9fbf2;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 body .app-wrap .src-wizard-hero .search-box div[class^="input-box"] input:focus {
@@ -98,12 +114,11 @@ body .app-wrap .src-wizard-hero .search-box .path-show {
 }
 
 body .app-wrap .app-info {
-  max-width: 475px;
+  max-width: 550px;
   margin-right: 40px;
 }
 
 body .app-wrap .app-info .proj-title {
-  font-family: utopia-std-caption, serif;
   font-weight: 700;
   font-style: normal;
   color: #f9fbf2;
@@ -117,8 +132,7 @@ body .app-wrap .app-info .proj-title span {
 
 body .app-wrap .app-info .proj-desc {
   color: #f9fbf2;
-  font-size: 14px;
-  font-family: sans-serif;
+  font-size: 18px;
   line-height: 24px;
   font-weight: 200;
 }
@@ -127,11 +141,10 @@ body .app-wrap .app-info .proj-btn {
   border: 0px;
   background: #0fa3b1;
   color: #f9fbf2;
-  font-size: 24px;
-  font-family: utopia-std-caption, serif;
+  font-size: 18px;
   font-weight: 700;
   font-style: normal;
-  padding: 7px 25px;
+  padding: 10px 30px;
   border-radius: 3px;
 }
 
@@ -238,38 +251,125 @@ body .app-wrap .app-info .proj-btn:disabled {
 }
 
 .loader-sec h2 {
-  font-size: 100px;
+  font-size: clamp(30px, 5vw, 60px);
   color: #f9fbf2;
+  margin: 3vh 0vh;
 }
 
 .loader-sec .loader-bar {
   max-width: 600px;
-  width: 100%;
-  height: 20px;
+  width: 80%;
+  height: 30px;
   background-color: grey;
-  border-radius: 12px;
+  border-radius: 40px;
   position: relative;
 }
 
 .loader-sec .loader-bar .loader-thumb {
   height: 100%;
   background-color: #0fa3b1;
-  border-radius: 12px;
+  border-radius: 40px;
   -webkit-transition: 0.35s ease;
   transition: 0.35s ease;
+}
+
+.loader-sec .loader-bar .loader-num {
+  color: white;
+  position: absolute;
+  left: calc(50% - 11px);
+  top: -14px;
 }
 
 @media (max-width: 1100px) {
   body .app-wrap {
     -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-        -ms-flex-flow: column;
-            flex-flow: column;
-    max-width: 770px;
+    -webkit-box-direction: reverse;
+        -ms-flex-flow: column-reverse;
+            flex-flow: column-reverse;
+    max-width: 100%;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    padding: 0px 10px;
   }
   body .app-wrap .app-info {
     max-width: 100%;
     margin-right: 0px;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 0px;
+    text-align: center;
+    -webkit-box-flex: 0.5;
+        -ms-flex: 0.5;
+            flex: 0.5;
+  }
+  body .app-wrap .app-info .proj-title {
+    margin-top: 0px;
+    margin-top: 2vh;
+    font-size: clamp(24px, 5vw, 53px);
+  }
+  body .app-wrap .app-info .proj-desc {
+    font-size: clamp(16px, 3vw, 32px);
+    line-height: 140%;
+    margin: 1vh 0vh;
+  }
+  body .app-wrap .app-info .proj-btn {
+    font-size: clamp(16px, 5vw, 30px);
+  }
+  body .app-wrap .src-wizard-hero {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column;
+            flex-flow: column;
+  }
+  body .app-wrap .src-wizard-hero .search-box {
+    max-width: 100%;
+    width: 80vw;
+    height: 80vw;
+  }
+  body .app-wrap .src-wizard-hero .search-box div[class^="input-box"] input {
+    font-size: clamp(35px, 5vw, 80px);
+  }
+  body .app-wrap .src-wizard-hero .search-results {
+    height: 7vh;
+    padding: 0px;
+    font-size: 35px;
+    text-align: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    max-width: 80vw;
+    width: 100%;
+    overflow-y: hidden;
+    padding: 7px 0px;
+  }
+  body .app-wrap .src-wizard-hero .search-results::-webkit-scrollbar {
+    border-radius: 10px;
+    height: 10px;
+    background: rgba(128, 128, 128, 0.425);
+    border-radius: 10px;
+  }
+  body .app-wrap .src-wizard-hero .search-results::-webkit-scrollbar-thumb {
+    background-color: #0fa3b1;
+    border-radius: 10px;
+  }
+  body .app-wrap .src-wizard-hero .search-results h6 {
+    margin-bottom: 0px;
+    margin-right: 15px;
+    font-size: clamp(16px, 5vw, 26px);
+  }
+  body .app-wrap .src-wizard-hero .word-count {
+    position: relative;
+    top: auto;
+    left: auto;
+    font-size: clamp(19px, 5vw, 40px);
+    text-align: center;
+    max-width: 80vw;
+    margin: 10px 0px;
   }
 }
 /*# sourceMappingURL=App.css.map */

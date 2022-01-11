@@ -8,10 +8,11 @@ function WordSearch({srcSize, readySetter, wordRes}) {
     const [activeIndex, setActiveIndex] = useState(0)
     const [letterArray, setLetterArray] = useState(Array(srcSize).fill(''))
     const [hoveredPath, setHoveredPath] = useState([])
+    const [wordCount, setWordCount] = useState()
 
     useEffect(() => {
-        console.log('INSIDE WORD SEARCH,', wordRes)
-        console.log(matrix4x4)
+        console.log('WORDRES CHANGE', wordRes)
+        wordRes && setWordCount(wordRes.length)
     }, [wordRes])
 
     useEffect(() => {
@@ -19,7 +20,6 @@ function WordSearch({srcSize, readySetter, wordRes}) {
     }, [letterArray])
 
     const modLetters = (index, mod) => {
-        console.log('modLetters called')
         setLetterArray(prevLetters => {
             const mutLetters = Array.from(prevLetters)
             mutLetters.splice(index, 1, mod)
@@ -46,15 +46,16 @@ function WordSearch({srcSize, readySetter, wordRes}) {
        }
     }
 
-    const passUpPathHovered = (path) => {
-        console.log('passed up', path)
-        setHoveredPath(path)
-    }
-
+    const passUpPathHovered = (path) => {setHoveredPath(path)}
     const passUpPathRemoved = () => {setHoveredPath([])}
+
+    let wordCountTxt = '';
+    if(wordCount > 0) wordCountTxt = <h3 className="word-count">This many words found: <span className="count">{wordCount}</span></h3>
+    if(wordCount === 0) wordCountTxt = <h3 className="word-count">No words found!</h3>
 
     return (
         <SearchWrap>
+            {wordCountTxt}
             <div className='search-box'>
                 {letterArray.length && letterArray.map( (el, index) => {
                     return <InputBox
@@ -67,8 +68,8 @@ function WordSearch({srcSize, readySetter, wordRes}) {
                 })}
             </div>
             <div className="search-results">
-                {wordRes && wordRes.length && wordRes.map(el => {
-                    return <WordResult word={el.word} path={el.path} passUpPathRemoved={passUpPathRemoved} passUpPathHovered={passUpPathHovered}/>
+                {wordRes && wordRes.length > 0 && wordRes.map(el => {
+                    return <WordResult key={el.word} word={el.word} path={el.path} passUpPathRemoved={passUpPathRemoved} passUpPathHovered={passUpPathHovered}/>
                 })}
             </div>
         </SearchWrap>
