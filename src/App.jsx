@@ -1,5 +1,6 @@
 import './App.css';
-import {appExec} from './scripts/wizard.js';
+import {appExec, wordSearch, displayResults, clearPreviousWords, appConfig, genGrid} from './scripts/wizard.js';
+import {genStart} from '../src/helpers/appStart.js'
 import AppWrap from './components/AppWrap';
 import AppInfo from './components/AppInfo';
 import WordSearch from './components/search-box/WordSearch'
@@ -7,11 +8,20 @@ import LoadingScreen from './components/LoadingScreen';
 import {useState, useEffect} from 'react'
 
 function App() {
+
   const [genReady, setGenReady] = useState(false)
+  // sets the size of the grid to 16 tiles (4x4)
   const [srcSize, setSrcSize] = useState(16)
   const [letters, setLetters] = useState()
   const [wordRes, setWordRes] = useState()
   const [loader, setLoader] = useState(false)
+  const [loadingProg, setLoadingProg] = useState(0)
+
+  // on component mount, execute the appCondig function in wizard.js
+  // this prepares the game dictionary and arrays of words
+  useEffect(() => {
+    appConfig() 
+  }, [])
 
   const readySetter = (ready, letters) => {
     if(ready){
@@ -23,16 +33,42 @@ function App() {
   }
 
   const genStart = async() => {
+
+    const letterMatrix = await genGrid(srcSize, letters)
+    //start the loading screen overlay
     setLoader(true)
-    const words = await appExec(srcSize, letters)
+
+    //clear previous word resposne array
+    clearPreviousWords()
+
+    //begin a word search loop where each search starts with a letter in the 2d array
+    for(let i = 0; i < letterMatrix.length; i++){
+      for(let j = 0; j < letterMatrix[0].length; j++){
+          let path = [{letter: letterMatrix[i][j], row: i, col: j}]
+          wordSearch(path, letterMatrix)
+          setLoadingProg(prevProg => {return prevProg + (100/srcSize)})
+          await new Promise((resolve) => setTimeout(resolve, 350));
+      }
+    }
+
+    //get the word response array and display it
+    const words = displayResults()
     setWordRes(words)
+
+    //turn off loader
     setLoader(false)
+    setLoadingProg(0)
   }
 
   return (
     <AppWrap loader={loader}>
-      {loader && <LoadingScreen srcSize={srcSize}/>}
+      {/* loading screen overlay */}
+      {loader && <LoadingScreen srcSize={srcSize} loadingProg={loadingProg}/>}
+
+      {/* landing page text and button that starts the search */}
       <AppInfo genReady={genReady} genStart={genStart}/>
+
+      {/* word search box that needs to be populated with letters before starting game */}
       <WordSearch srcSize={srcSize} readySetter={readySetter} wordRes={wordRes}/>
     </AppWrap>
   );

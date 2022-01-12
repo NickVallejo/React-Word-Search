@@ -1,9 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
 $blk: #2f2f2f;
 $wht: #f9fbf2;
 $blu: #0fa3b1;
 
 body {
   background: $blk;
+  font-family: "Lato", sans-serif;
   // .click-off {
   //   pointer-events: none;
   // }
@@ -12,11 +15,22 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: 1400px;
+    max-width: 1450px;
     padding: 0px 40px;
     margin: 0 auto;
     .src-wizard-hero {
       display: flex;
+      position: relative;
+      .word-count {
+        position: absolute;
+        top: -85px;
+        left: 10px;
+        color: $wht;
+        font-size: 32px;
+        .count {
+          color: $blu;
+        }
+      }
       .search-results {
         max-height: 590px;
         overflow-y: scroll;
@@ -34,11 +48,12 @@ body {
           border-radius: 10px;
         }
         h6 {
-          font-family: utopia-std-caption, serif;
           font-weight: 700;
           font-style: normal;
           color: $blu;
           cursor: pointer;
+          margin: 0px;
+          margin-bottom: 30px;
           &:hover {
             opacity: 0.7;
           }
@@ -52,21 +67,22 @@ body {
         div[class^="input-box"] {
           width: 25%;
           box-sizing: border-box;
-          padding: 10px;
+          padding: 1%;
           position: relative;
           input {
             background: transparent;
             border: 1px solid $wht;
             width: 100%;
             height: 100%;
-            padding: 0px;
             margin: 0px;
             font-size: 80px;
             text-align: center;
-            font-family: utopia-std-caption, serif;
+
             font-weight: 700;
             font-style: normal;
             color: $wht;
+            // padding: 40% 0%;
+            box-sizing: border-box;
             &:focus {
               color: $blu;
             }
@@ -79,10 +95,9 @@ body {
     }
 
     .app-info {
-      max-width: 475px;
+      max-width: 550px;
       margin-right: 40px;
       .proj-title {
-        font-family: utopia-std-caption, serif;
         font-weight: 700;
         font-style: normal;
         color: $wht;
@@ -94,8 +109,8 @@ body {
       }
       .proj-desc {
         color: $wht;
-        font-size: 14px;
-        font-family: sans-serif;
+        font-size: 18px;
+
         line-height: 24px;
         font-weight: 200;
       }
@@ -103,11 +118,10 @@ body {
         border: 0px;
         background: $blu;
         color: $wht;
-        font-size: 24px;
-        font-family: utopia-std-caption, serif;
+        font-size: 18px;
         font-weight: 700;
         font-style: normal;
-        padding: 7px 25px;
+        padding: 10px 30px;
         border-radius: 3px;
         &:disabled {
           opacity: 0.5;
@@ -202,21 +216,28 @@ body {
   align-items: center;
   z-index: 999;
   h2 {
-    font-size: 100px;
+    font-size: clamp(30px, 5vw, 60px);
     color: $wht;
+    margin: 3vh 0vh;
   }
   .loader-bar {
     max-width: 600px;
-    width: 100%;
-    height: 20px;
+    width: 80%;
+    height: 30px;
     background-color: grey;
-    border-radius: 12px;
+    border-radius: 40px;
     position: relative;
     .loader-thumb {
       height: 100%;
       background-color: $blu;
-      border-radius: 12px;
-      transition: 1.5s ease;
+      border-radius: 40px;
+      transition: 0.35s ease;
+    }
+    .loader-num {
+      color: white;
+      position: absolute;
+      left: calc(50% - 11px);
+      top: -14px;
     }
   }
 }
@@ -224,12 +245,83 @@ body {
 @media (max-width: 1100px) {
   body {
     .app-wrap {
-      flex-flow: column;
-      max-width: 770px;
+      flex-flow: column-reverse;
+      max-width: 100%;
+      justify-content: flex-start;
+      padding: 0px 10px;
       .app-info {
         max-width: 100%;
         margin-right: 0px;
+        box-sizing: border-box;
+        padding: 10px;
+        margin-bottom: 0px;
+        text-align: center;
+        flex: 0.5;
+        .proj-title {
+          margin-top: 0px;
+          margin-top: 2vh;
+          font-size: clamp(24px, 5vw, 53px);
+        }
+        .proj-desc {
+          font-size: clamp(16px, 3vw, 32px);
+          line-height: 140%;
+          margin: 1vh 0vh;
+        }
+        .proj-btn {
+          font-size: clamp(16px, 5vw, 30px);
+        }
       }
+      .src-wizard-hero {
+        flex-flow: column;
+        .search-box {
+          max-width: 100%;
+          width: 80vw;
+          height: 80vw;
+          div[class^="input-box"] {
+            input {
+              font-size: clamp(35px, 5vw, 80px);
+            }
+          }
+        }
+        .search-results {
+          height: 7vh;
+          padding: 0px;
+          font-size: 35px;
+          text-align: center;
+          display: flex;
+          align-items: center;
+          max-width: 80vw;
+          width: 100%;
+          overflow-y: hidden;
+          padding: 7px 0px;
+          &::-webkit-scrollbar {
+            border-radius: 10px;
+            height: 10px;
+            background: rgba(128, 128, 128, 0.425);
+            border-radius: 10px;
+          }
+          &::-webkit-scrollbar-thumb {
+            background-color: $blu;
+            border-radius: 10px;
+          }
+          h6 {
+            margin-bottom: 0px;
+            margin-right: 15px;
+            font-size: clamp(16px, 5vw, 26px);
+          }
+        }
+        .word-count {
+          position: relative;
+          top: auto;
+          left: auto;
+          font-size: clamp(19px, 5vw, 40px);
+          text-align: center;
+          max-width: 80vw;
+          margin: 10px 0px;
+        }
+      }
+    }
+    .loader-sec {
     }
   }
 }

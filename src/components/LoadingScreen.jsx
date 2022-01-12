@@ -1,5 +1,6 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React from 'react'
 
+<<<<<<< HEAD
 function LoadingScreen({srcSize}) {
     const [dots, setDots] = useState('')
     const [loadingProg, setLoadingProg] = useState(0)
@@ -42,13 +43,16 @@ function LoadingScreen({srcSize}) {
             }
         }, 500)
     }
+=======
+function LoadingScreen({loadingProg}) {
+>>>>>>> word-res
 
     return (
         <div className='loader-sec'>
-           <h2>Loading <span>{dots}</span></h2>
+           <h2>Loading...</h2>
            <div className="loader-bar">
                <div className="loader-thumb" style={{width: `${loadingProg}%`}}></div>
-               <h3>{loadingProg}</h3>
+               <h3 className="loader-num">{loadingProg}%</h3>
            </div>
         </div>
     )
