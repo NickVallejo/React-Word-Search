@@ -20,9 +20,11 @@ export const genGrid = (gridSize, letters) => {
     const sqrtSize = Math.sqrt(gridSize)
     let counter = 0
     
+    //make a square 2d array
     letterMatrix = Array.from({length: sqrtSize}, e => 
         Array.from({length: sqrtSize}, e => ''))
 
+    //fill each position with the letters of inputted by user
     letterMatrix.forEach((row, rowIndex) => {
         row.forEach((col, colIndex) => {
             letterMatrix[rowIndex][colIndex] = letters[counter]
@@ -42,20 +44,20 @@ export const wordFetch = async() => {
     dic = dic.filter(word => word.length > 2)
 }
 
-export const displayResults = (resReturn) => {
-    const resMap = resReturn.map((res) => {
-        return {word: res.map(obj => obj.letter).join(''), path: res.map(obj => [obj.row, obj.col])}
+export const displayResults = () => {
+    let resMap = []
+    uniqueArrays.forEach(res => {
+        const uniqueWord = res.map(obj => obj.letter).join('')
+        if(resMap.some(el => el.word == uniqueWord) === false){
+            resMap.push({word: uniqueWord, path: res.map(obj => [obj.row, obj.col])})
+        }
     })
-
-    resMap.forEach(res => {
-        !wordDisplay.some(el => el.word === res.word) && wordDisplay.push(res)
-    })
-
-    return wordDisplay
+    return resMap
 }
 
 export const clearPreviousWords = () => {
-    uniqueArrays.length = 0
+    wordDisplay = []
+    uniqueArrays = []
     console.log(uniqueArrays, 'WIZARD ARRAY RESET')
 }
 
@@ -108,7 +110,7 @@ export const wordSearch = (path=[], letterMatrix) => {
         }
     }
 
-    return uniqueArrays
+    //return uniqueArrays
 } 
 
 export const appConfig = async() => {

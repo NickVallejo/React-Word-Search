@@ -23,10 +23,6 @@ function App() {
     appConfig() 
   }, [])
 
-  useEffect(() => {
-    console.log('SET BEFORE START', wordRes)
-  }, [wordRes])
-
   const readySetter = (ready, letters) => {
     if(ready){
       setGenReady(true)
@@ -37,29 +33,29 @@ function App() {
   }
 
   const genStart = async() => {
-    let uniqueArrays = [];
+
     const letterMatrix = await genGrid(srcSize, letters)
-    
-    // erase the last response of searched words before starting a new search
-    // setWordRes(undefined)
     //start the loading screen overlay
     setLoader(true)
 
+    //clear previous word resposne array
     clearPreviousWords()
+
     //begin a word search loop where each search starts with a letter in the 2d array
-    
-    // for(let i = 0; i < letterMatrix.length; i++){
-    //   for(let j = 0; j < letterMatrix[0].length; j++){
-    //       let path = [{letter: letterMatrix[i][j], row: i, col: j}]
-    //       uniqueArrays = wordSearch(path, letterMatrix)
-    //       setLoadingProg(prevProg => {return prevProg + (100/srcSize)})
-    //       await new Promise((resolve) => setTimeout(resolve, 350));
-    //   }
-    // }
+    for(let i = 0; i < letterMatrix.length; i++){
+      for(let j = 0; j < letterMatrix[0].length; j++){
+          let path = [{letter: letterMatrix[i][j], row: i, col: j}]
+          wordSearch(path, letterMatrix)
+          setLoadingProg(prevProg => {return prevProg + (100/srcSize)})
+          await new Promise((resolve) => setTimeout(resolve, 350));
+      }
+    }
 
-
-    const words = displayResults(uniqueArrays)
+    //get the word response array and display it
+    const words = displayResults()
     setWordRes(words)
+
+    //turn off loader
     setLoader(false)
     setLoadingProg(0)
   }

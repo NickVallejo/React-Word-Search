@@ -68,7 +68,7 @@ function WordSearch({srcSize, readySetter, wordRes}) {
                 })}
             </div>
             <div className="search-results">
-                {wordRes && wordRes.length > 0 && wordRes.map(el => {
+                {(wordRes && wordRes.length > 0) && wordRes.map(el => {
                     return <WordResult key={el.word} word={el.word} path={el.path} passUpPathRemoved={passUpPathRemoved} passUpPathHovered={passUpPathHovered}/>
                 })}
             </div>
