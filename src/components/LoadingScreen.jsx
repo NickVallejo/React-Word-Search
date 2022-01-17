@@ -1,6 +1,5 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 
-<<<<<<< HEAD
 function LoadingScreen({srcSize}) {
     const [dots, setDots] = useState('')
     const [loadingProg, setLoadingProg] = useState(0)
@@ -43,9 +42,6 @@ function LoadingScreen({srcSize}) {
             }
         }, 500)
     }
-=======
-function LoadingScreen({loadingProg}) {
->>>>>>> word-res
 
     return (
         <div className='loader-sec'>
