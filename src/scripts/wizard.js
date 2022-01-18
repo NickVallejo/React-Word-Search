@@ -38,10 +38,11 @@ export const genGrid = (gridSize, letters) => {
 // fetches the dictionary.txt file, line breaks each word and removes
 // words that are 2 letters or less
 export const wordFetch = async() => {
-    const dictionary = await fetch('dictionary.txt')
+    const dictionary = await fetch('/React-Word-Search/dictionary.txt')
     dic = await dictionary.text()
     dic = dic.split("\r\n")
     dic = dic.filter(word => word.length > 2)
+    console.log('dic', dic)
 }
 
 export const displayResults = () => {
@@ -58,7 +59,6 @@ export const displayResults = () => {
 export const clearPreviousWords = () => {
     wordDisplay = []
     uniqueArrays = []
-    console.log(uniqueArrays, 'WIZARD ARRAY RESET')
 }
 
 export const wordSearch = (path=[], letterMatrix) => {
