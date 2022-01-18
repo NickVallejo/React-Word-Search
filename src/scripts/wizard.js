@@ -115,31 +115,5 @@ export const wordSearch = (path=[], letterMatrix) => {
 
 export const appConfig = async() => {
     await wordFetch()
-<<<<<<< HEAD
-
-    for(let i = 0; i < letterMatrix.length; i++){
-        for(let j = 0; j < letterMatrix[0].length; j++){
-            console.log('word searching...')
-            let path = [{letter: letterMatrix[i][j], row: i, col: j}]
-            wordSearch(path)
-            document.dispatchEvent(addLoad)
-        }
-    }
-
-    // letterMatrix.forEach((row, rowIndex) => {
-    //     row.forEach(async (letter, colIndex) => {
-    //         console.log('word searching...')
-    //         let path = [{letter: letterMatrix[rowIndex][colIndex], row: rowIndex, col: colIndex}]
-    //         wordSearch(path)
-    //         document.dispatchEvent(addLoad)
-    //     })
-    // })
-
-    return displayResults(uniqueArrays)
-    // console.log(uniqueArrays)
-    // return uniqueArrays
-}
-=======
     letterGen()
 } 
->>>>>>> word-res
