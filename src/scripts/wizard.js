@@ -40,7 +40,7 @@ export const genGrid = (gridSize, letters) => {
 export const wordFetch = async() => {
     const dictionary = await fetch('/React-Word-Search/dictionary.txt')
     dic = await dictionary.text()
-    dic = dic.split("\r\n")
+    dic = dic.split("\n")
     dic = dic.filter(word => word.length > 2)
     console.log('dic', dic)
 }
