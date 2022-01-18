@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/React-Word-Search/static/css/main.9d3d6ecf.chunk.css",
-    "main.js": "/React-Word-Search/static/js/main.251f0adb.chunk.js",
-    "main.js.map": "/React-Word-Search/static/js/main.251f0adb.chunk.js.map",
+    "main.js": "/React-Word-Search/static/js/main.0460b9a7.chunk.js",
+    "main.js.map": "/React-Word-Search/static/js/main.0460b9a7.chunk.js.map",
     "runtime-main.js": "/React-Word-Search/static/js/runtime-main.28e3a3e4.js",
     "runtime-main.js.map": "/React-Word-Search/static/js/runtime-main.28e3a3e4.js.map",
     "static/js/2.9aee3d30.chunk.js": "/React-Word-Search/static/js/2.9aee3d30.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.28e3a3e4.js",
     "static/js/2.9aee3d30.chunk.js",
     "static/css/main.9d3d6ecf.chunk.css",
-    "static/js/main.251f0adb.chunk.js"
+    "static/js/main.0460b9a7.chunk.js"
   ]
 }
